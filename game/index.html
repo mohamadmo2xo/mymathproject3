@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0a0a1a">
+<title>اهرب من الرياضيات ⚪</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚪</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="game.css">
+</head>
+<body>
+
+<div class="bg"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+
+<a href="../" class="back-btn" title="العودة للموقع" aria-label="العودة">
+  <span>🏠</span>
+</a>
+
+<div class="game">
+  <div class="hud">
+    <div class="hud-right">
+      <span class="hearts" id="hearts">❤️❤️❤️</span>
+      <span class="level-badge" id="levelBadge">المستوى 1</span>
+    </div>
+    <div class="timer" id="timer">0.0s</div>
+    <div class="best" id="best">أفضل: 0.0s</div>
+  </div>
+  <canvas id="canvas"></canvas>
+</div>
+
+<div class="overlay" id="startOverlay">
+  <div class="card">
+    <div class="big-icon">⚪</div>
+    <h1>اهرب من الرياضيات</h1>
+    <p>حرّك الدائرة بإصبعك واهرب من الرموز!</p>
+    <div class="rules">
+      <div>❤️ لديك <b>3 قلوب</b></div>
+      <div>📐 تجنّب: + − × ÷ √ π e ln ² ³</div>
+      <div>⏱️ اصمد أطول وقت ممكن</div>
+      <div>🔥 الصعوبة تزداد تلقائيًا</div>
+    </div>
+    <button class="btn-start" id="startBtn">🎮 ابدأ اللعب</button>
+  </div>
+</div>
+
+<div class="overlay" id="gameOverOverlay" hidden>
+  <div class="card">
+    <div class="big-icon">💔</div>
+    <h2>انتهت اللعبة!</h2>
+    <div class="result">
+      <div class="result-row"><span>⏱️ وقتك</span><b id="finalTime">0.0s</b></div>
+      <div class="result-row"><span>🏆 أفضل نتيجة</span><b id="bestTime">0.0s</b></div>
+      <div class="result-row"><span>🎯 المستوى</span><b id="finalLevel">1</b></div>
+    </div>
+    <div class="msg" id="resultMessage"></div>
+    <button class="btn-start" id="retryBtn">🔁 العب مرة أخرى</button>
+  </div>
+</div>
+
+<script src="game.js"></script>
+</body>
+</html>

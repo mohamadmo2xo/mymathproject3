@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+<meta name="theme-color" content="#0a0a1a">
+<meta name="description" content="منصة شاملة لملفات وبحوث الرياضيات">
+<title>مكتبة الرياضيات</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- شاشة التحميل -->
+<div class="page-loader" id="pageLoader">
+  <div class="loader-content">
+    <div class="loader-icon">📚</div>
+    <div class="loader-title">مكتبة الرياضيات</div>
+    <div class="loader-dots"><span></span><span></span><span></span></div>
+  </div>
+</div>
+
+<!-- شاشة إدخال الاسم -->
+<div class="name-overlay" id="nameOverlay" hidden>
+  <div class="name-card">
+    <div class="name-icon">👋</div>
+    <h2>أهلاً بك</h2>
+    <p>من فضلك أدخل اسمك لنرحب بك</p>
+    <input type="text" id="nameInput" placeholder="اسمك هنا..." maxlength="30" autocomplete="off">
+    <button class="btn-primary" id="nameSubmit">ابدأ التصفح</button>
+    <div class="name-error" id="nameError"></div>
+  </div>
+</div>
+
+<!-- شاشة الصيانة -->
+<div class="maintenance-screen" id="maintenanceScreen" hidden>
+  <div class="maintenance-content">
+    <div class="maintenance-icon">🛠️</div>
+    <h1>الموقع تحت الصيانة</h1>
+    <p>نعتذر عن الإزعاج، نُحسّن الموقع وسنعود قريبًا بإذن الله</p>
+    <div class="maintenance-divider"></div>
+    <h2>🎮 خذ استراحة والعب!</h2>
+    <a href="game/" class="btn-play">⚪ اهرب من الرياضيات</a>
+  </div>
+</div>
+
+<!-- الإشعار العلوي -->
+<div class="notice-bar" id="noticeBar" hidden></div>
+
+<!-- شريط الإعلانات -->
+<div class="ticker-bar" id="tickerBar">
+  <div class="ticker-content" id="tickerContent"></div>
+</div>
+
+<!-- الخلفيات -->
+<div class="bg-animation"></div>
+<div class="bg-overlay"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+<div id="particles"></div>
+
+<!-- أزرار التحكم -->
+<div class="top-controls">
+  <button class="control-btn" id="themeToggle" title="الوضع">🌙</button>
+  <button class="control-btn" id="soundToggle" title="الأصوات">🔊</button>
+</div>
+
+<!-- الأزرار العائمة -->
+<button class="float-btn back-to-top" id="backToTop" title="للأعلى">⬆️</button>
+<button class="float-btn home-btn" id="homeBtn" title="الرئيسية">🏠</button>
+<a href="game/" class="float-btn game-btn" title="العب معنا">🎮</a>
+
+<!-- الحاوية -->
+<div class="container">
+
+  <header class="site-header">
+    <div class="logo-badge"><span class="dot"></span><span>منصة تعليمية مجانية</span></div>
+    <h1 class="site-title">📚 مكتبة الرياضيات</h1>
+    <p class="site-desc">منصة شاملة لملفات وبحوث الرياضيات، مصنّفة لتسهيل التصفح والتنزيل</p>
+    <div class="greeting" id="greeting" hidden><span id="greetingText"></span></div>
+    <div class="header-actions">
+      <button class="header-btn" id="scheduleBtn">📅 <span>جدول المواعيد</span></button>
+    </div>
+  </header>
+
+  <div id="errorBox" class="error" hidden></div>
+
+  <div class="toolbar">
+    <div class="search-box">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="ابحث عن ملف أو مجلد..." autocomplete="off">
+    </div>
+    <button class="btn-icon" id="refreshBtn" title="تحديث">🔄</button>
+  </div>
+
+  <nav class="breadcrumb" id="breadcrumb"></nav>
+  <main id="content" class="grid"></main>
+  <div id="loading" class="loading" hidden><div class="spinner"></div><span>جاري تحميل الملفات...</span></div>
+  <div id="empty" class="empty" hidden><div class="empty-icon">📭</div><p>لا توجد ملفات هنا بعد</p></div>
+
+  <section class="contact-section">
+    <h2>💬 تواصل مع المدرسين</h2>
+    <p>لأي استفسار أو اقتراح، تواصل معنا مباشرة</p>
+    <div class="teachers-grid">
+      <div class="teacher-card">
+        <div class="teacher-avatar"><div class="teacher-avatar-fallback">👨‍🏫</div></div>
+        <h3 class="teacher-name">محمد رافع</h3>
+        <span class="teacher-role">مدرّس الرياضيات</span>
+        <a href="https://wa.me/963983664246?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D8%A3%D8%B3%D8%AA%D8%A7%D8%B0%20%D9%85%D8%AD%D9%85%D8%AF" target="_blank" rel="noopener" class="wa-btn">
+          <span class="wa-icon">📱</span><span>واتساب</span>
+        </a>
+      </div>
+      <div class="teacher-card">
+        <div class="teacher-avatar"><div class="teacher-avatar-fallback">👨‍🏫</div></div>
+        <h3 class="teacher-name">هادي عبد الحي</h3>
+        <span class="teacher-role">مدرّس الرياضيات</span>
+        <a href="https://wa.me/963945340328?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D8%A3%D8%B3%D8%AA%D8%A7%D8%B0%20%D9%87%D8%A7%D8%AF%D9%8A" target="_blank" rel="noopener" class="wa-btn">
+          <span class="wa-icon">📱</span><span>واتساب</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="developed-by">
+      <span class="dev-label">تم التطوير والبرمجة بواسطة</span>
+      <div class="dev-name-wrap"><span class="dev-name">محمد رافع</span></div>
+    </div>
+    <div class="footer-copy">© <span id="year"></span> — جميع الحقوق محفوظة</div>
+  </div>
+</footer>
+
+<!-- نافذة جدول المواعيد -->
+<div class="modal" id="scheduleModal" hidden>
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-content">
+    <button class="modal-close" data-close>✖</button>
+    <h2 class="modal-title" id="scheduleTitle">📅 جدول المواعيد</h2>
+    <div class="schedule-list" id="scheduleList"></div>
+  </div>
+</div>
+
+<!-- 🔌 مفتاح الصيانة -->
+<script>
+  window.MAINTENANCE_MODE = false;
+</script>
+
+<script src="script.js"></script>
+</body>
+</html>
